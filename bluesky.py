@@ -7,6 +7,8 @@ from signal import pause
 moving = False
 import skywriter
 
+BD_PROTOCOL_VERSION = 1
+
 # robot runs the bluedot server
 bd_server = 'artipi'
 #bd_server = 'BlueZ 5.43'
@@ -56,6 +58,8 @@ def data_received(data):
 
 print("Connecting to {}".format(bd_server))
 c = BluetoothClient(bd_server, data_received)
+print("Sending protocol version")
+c.send("3,{},BlueSky\n".format(BD_PROTOCOL_VERSION))
 print("  Connected to {}".format(bd_server))
 
 #print("Sending")
